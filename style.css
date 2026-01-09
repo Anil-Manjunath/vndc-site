@@ -1,0 +1,77 @@
+:root{
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --muted: #687188;
+  --text: #0f1724;
+  --primary: #2b6ef6;
+  --accent: #ff7a59;
+  --glass: rgba(11,20,40,0.04);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+.site-header{background:transparent;padding:18px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;position:relative} 
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;object-fit:cover;border-radius:6px}
+.brand span{font-weight:700;font-size:18px;color:var(--text)}
+.nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+.nav a:hover{color:var(--text)}
+
+.page{display:flex;gap:36px;padding:48px 0;align-items:flex-start}
+.left{flex:2}
+.right{flex:1}
+
+h1{font-size:34px;margin:0 0 10px;font-weight:700}
+.subtitle{color:var(--muted);margin:6px 0 18px}
+
+.price{font-size:20px;margin:8px 0}
+.price strong{color:var(--primary);font-size:28px}
+.badge{background:var(--accent);color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;margin-left:10px}
+
+.features{margin:18px 0;padding-left:18px;color:var(--muted)}
+.features li{margin-bottom:8px}
+
+.customers{margin-top:10px;font-weight:600;color:var(--muted)}
+
+.actions{margin-top:18px;display:flex;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:600}
+.btn-primary{background:linear-gradient(90deg,var(--primary),#1e56e3);color:#fff}
+.btn-outline{background:transparent;border:1px solid var(--glass);color:var(--primary)}
+
+.note{margin-top:18px;color:var(--muted);font-size:14px}
+.poster{margin-top:20px;border-radius:8px;max-width:100%;box-shadow:0 8px 24px rgba(15,23,36,0.06)}
+
+.card{background:var(--surface);padding:22px;border-radius:12px;box-shadow:0 6px 18px rgba(11,20,40,0.06)}
+.card h3{margin:0 0 12px;font-size:18px}
+.card label{font-size:13px;display:block;margin-top:12px;color:var(--muted)}
+.card input{width:100%;padding:12px;border-radius:8px;border:1px solid #e6eefc;margin-top:6px;background:#fbfdff}
+
+.pay{width:100%;margin-top:18px;padding:12px;border-radius:10px;border:none;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
+.pay:hover{filter:brightness(.98)}
+
+.logos{text-align:center;margin-top:12px;font-size:13px;color:var(--muted)}
+
+.site-footer{padding:28px 0;color:var(--muted);font-size:13px;text-align:center}
+
+@media(max-width:900px){
+  .page{flex-direction:column;padding:24px 0}
+  .header-inner{padding:0;position:relative}
+  .desktop-nav{display:none}
+  .nav-toggle{display:block}
+
+  /* mobile nav */
+  .nav--mobile{display:none;position:absolute;top:64px;right:20px;background:var(--surface);padding:12px;border-radius:8px;box-shadow:0 10px 30px rgba(11,20,40,0.12);min-width:200px;z-index:100}
+  .nav--mobile a{display:block;padding:8px 0;color:var(--text)}
+  .nav--mobile.open{display:block}
+}
