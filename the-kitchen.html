@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dropdown.css">
+  <link rel="stylesheet" href="css/repertoire.css">
+  <title>The Kitchen - VNDC</title>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="navbar">
+  <div class="logo">VNDC</div>
+  <nav>
+    <div class="nav-item">
+      <a href="index.html">Home</a>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="repertoire.html">Repertoire</a>
+      <div class="dropdown-menu">
+        <a href="yele-oota.html">Yele Oota</a>
+        <a href="jaaga-illa.html">Jaaga Illa</a>
+        <a href="the-kitchen.html">The Kitchen</a>
+        <a href="pyre.html">Pyre</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="films.html">Films</a>
+      <div class="dropdown-menu">
+        <a href="films.html#stage-design">Stage Design</a>
+        <a href="films.html#lighting-sound">Lighting & Sound</a>
+        <a href="films.html#creative-direction">Creative Direction</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="commercial-events.html">Commercial events</a>
+      <div class="dropdown-menu">
+        <a href="commercial-events.html#small-events">Small Events</a>
+        <a href="commercial-events.html#brand-collaborations">Brand Collaborations</a>
+        <a href="commercial-events.html#gala-shows">Gala Shows</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="team.html">Team</a>
+      <div class="dropdown-menu">
+        <a href="team.html#director">Director</a>
+        <a href="team.html#principal-dancer">Principal Dancer</a>
+        <a href="team.html#company-dancers">Company Dancers</a>
+        <a href="team.html#visiting-dancers-section">Visiting Dancers</a>
+      </div>
+    </div>
+  </nav>
+  <a href="profile.html" class="profile" target="_blank" rel="noopener">Vishwakiran Nambi</a>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>The Kitchen</h1>
+    <p>A vibrant exploration of community, collaboration, and creative processes.</p>
+  </div>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="assets/The Kitchen.mp4" type="video/mp4">
+    <img src="assets/TC_VNDC_EyeBall.jpg" alt="The Kitchen">
+  </video>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="company interactive-section">
+  <div class="container">
+    <h2>About The Kitchen</h2>
+    <p>"The Kitchen" represents a crystallization of twenty years of research into the evolving lexicon of Modern Indian Dance. This 10-minute 23-second cinematic work interrogates the liminal spaces between tradition and contemporaneity, exploring how quotidian domestic environments become theaters of profound personal transformation. Through deliberate choreographic choices and sophisticated visual storytelling, the film excavates the inherent poetry within mundane ritualistic practices, revealing the kitchen as both sanctuary and site of existential inquiry.
+The work emerges from my sustained investigation into what I term "embodied anthropology" – where movement becomes a methodology for understanding cultural identity, gender dynamics, and the politics of space within the Indian domestic sphere.
+</p>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="production interactive-section">
+  <div class="container">
+    <h2>Gallery</h2>
+    <div class="production-grid">
+      <div class="prod-card interactive-card gallery-item">
+        <img src="assets/TC_VNDC_EyeBall.jpg" alt="The Kitchen - Photo 1">
+      </div>
+      <div class="prod-card interactive-card gallery-item">
+        <img src="assets/30.jpg" alt="The Kitchen - Photo 2">
+      </div>
+      <div class="prod-card interactive-card gallery-item">
+        <img src="assets/47.jpg" alt="The Kitchen - Photo 3">
+      </div>
+      <div class="prod-card interactive-card gallery-item">
+        <img src="assets/TC_VNDC_EyeBall.jpg" alt="The Kitchen - Photo 4">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS SECTION -->
+<section id="videos" class="corporate interactive-section">
+  <div class="container">
+    <h2>Videos</h2>
+    <div class="corporate-grid">
+      <div class="corp-card interactive-card video-item">
+        <div class="video-container">
+          <video id="video-the-kitchen" class="performance-video" poster="assets/TC_VNDC_EyeBall.jpg">
+            <source src="assets/The Kitchen.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <button class="play-button" onclick="document.getElementById('video-the-kitchen').requestFullscreen(); document.getElementById('video-the-kitchen').play();"></button>
+        </div>
+        <h4>Performance Highlights</h4>
+        <p>Watch the full performance of The Kitchen</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/script.js"></script>
+<script src="js/interactive.js"></script>
+<script src="js/scroll-animations.js"></script>
+<script>
+  const videoTheKitchen = document.getElementById('video-the-kitchen');
+  document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement) {
+      videoTheKitchen.pause();
+    }
+  });
+</script>
+</body>
+</html>
