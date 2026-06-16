@@ -14,10 +14,10 @@
 <header class="navbar">
   <div class="logo">VNDC</div>
   <nav>
-    <div class="nav-item">
+    <div class="nav-item" data-bg="assets/TC_VNDC_EyeBall_edit.jpg">
       <a href="index.html">Home</a>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/116.jpg">
       <a href="repertoire.html">Repertoire</a>
       <div class="dropdown-menu">
         <a href="yele-oota.html">Yele Oota</a>
@@ -26,7 +26,7 @@
         <a href="pyre.html">Pyre</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/47.jpg">
       <a href="films.html">Films</a>
       <div class="dropdown-menu">
         <a href="films.html#stage-design">Stage Design</a>
@@ -34,7 +34,7 @@
         <a href="films.html#creative-direction">Creative Direction</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/TC_VNDC_RainbowFlower.jpg">
       <a href="commercial-events.html">Commercial events</a>
       <div class="dropdown-menu">
         <a href="commercial-events.html#small-events">Small Events</a>
@@ -42,7 +42,7 @@
         <a href="commercial-events.html#gala-shows">Gala Shows</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/TC_VNDC_EyeBall.jpg">
       <a href="team.html">Team</a>
       <div class="dropdown-menu">
         <a href="team.html#director">Director</a>
@@ -52,6 +52,11 @@
       </div>
     </div>
   </nav>
+  <div class="nav-overlay" aria-hidden="true">
+    <div class="overlay-inner">
+      <div class="overlay-links"></div>
+    </div>
+  </div>
   <a href="profile.html" class="profile" target="_blank" rel="noopener">Vishwakiran Nambi</a>
 </header>
 
@@ -121,6 +126,48 @@ The work emerges from my sustained investigation into what I term "embodied anth
 <script src="js/script.js"></script>
 <script src="js/interactive.js"></script>
 <script src="js/scroll-animations.js"></script>
+<script>
+(function(){
+  const overlay = document.querySelector('.nav-overlay');
+  const navItems = document.querySelectorAll('.navbar nav > .nav-item, .navbar nav > a');
+  let hideTimeout;
+
+  function buildOverlayContent(item){
+    const dropdown = item.querySelector ? item.querySelector('.dropdown-menu') : null;
+    let html = '';
+    if(dropdown){
+      const links = dropdown.querySelectorAll('a');
+      links.forEach(a=>{ html += `<a href="${a.getAttribute('href')}">${a.textContent}</a>`; });
+    } else {
+      let topA = item.tagName === 'A' ? item : item.querySelector('a');
+      if(topA) html = `<a href="${topA.getAttribute('href')}">${topA.textContent}</a>`;
+    }
+    return html;
+  }
+
+  navItems.forEach(item=>{
+    const target = item;
+    item.addEventListener('mouseenter', ()=>{
+      const bg = target.getAttribute('data-bg') || (target.querySelector && target.querySelector('a') && target.querySelector('a').getAttribute('data-bg'));
+      if(bg && overlay){
+        overlay.style.backgroundImage = `linear-gradient(rgba(10,10,12,0.55), rgba(10,10,12,0.55)), url(${bg})`;
+      }
+      const content = buildOverlayContent(target);
+      const linksWrap = overlay.querySelector('.overlay-links');
+      if(linksWrap){ linksWrap.innerHTML = content; }
+      overlay.classList.add('visible');
+      clearTimeout(hideTimeout);
+    });
+    item.addEventListener('mouseleave', ()=>{
+      hideTimeout = setTimeout(()=> overlay.classList.remove('visible'), 150);
+    });
+  });
+  if(overlay){
+    overlay.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); overlay.classList.add('visible'); });
+    overlay.addEventListener('mouseleave', ()=> overlay.classList.remove('visible'));
+  }
+})();
+</script>
 <script>
   const videoTheKitchen = document.getElementById('video-the-kitchen');
   document.addEventListener('fullscreenchange', function() {
