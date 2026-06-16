@@ -15,10 +15,10 @@
 <header class="navbar">
   <div class="logo">VNDC</div>
   <nav>
-    <div class="nav-item">
+    <div class="nav-item" data-bg="assets/TC_VNDC_EyeBall_edit.jpg">
       <a href="index.html">Home</a>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/116.jpg">
       <a href="repertoire.html">Repertoire</a>
       <div class="dropdown-menu">
         <a href="yele-oota.html">Yele Oota</a>
@@ -27,7 +27,7 @@
         <a href="pyre.html">Pyre</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/Copy of 116.jpeg">
       <a href="films.html">Films</a>
       <div class="dropdown-menu">
         <a href="films.html#section">Stage Design</a>
@@ -35,7 +35,7 @@
         <a href="films.html#section">Creative Direction</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/TC_VNDC_RainbowFlower.jpg">
       <a href="commercial-events.html">Commercial events</a>
       <div class="dropdown-menu">
         <a href="commercial-events.html#section">Small Events</a>
@@ -43,7 +43,7 @@
         <a href="commercial-events.html#section">Gala Shows</a>
       </div>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/TC_VNDC_EyeBall.jpg">
       <a href="team.html">Team</a>
       <div class="dropdown-menu">
         <a href="team.html#director">Director</a>
@@ -53,6 +53,17 @@
       </div>
     </div>
   </nav>
+  <div class="nav-overlay" aria-hidden="true">
+    <div class="overlay-inner">
+      <div class="overlay-links">
+        <a href="index.html">Home</a>
+        <a href="repertoire.html">Repertoire</a>
+        <a href="films.html">Films</a>
+        <a href="commercial-events.html">Commercial events</a>
+        <a href="team.html">Team</a>
+      </div>
+    </div>
+  </div>
   <a href="profile.html" class="profile" target="_blank" rel="noopener">Vishwakiran Nambi</a>
 </header>
 
@@ -105,5 +116,49 @@
 <script src="js/script.js"></script>
 <script src="js/interactive.js"></script>
 <script src="js/scroll-animations.js"></script>
+<script>
+(function(){
+  const overlay = document.querySelector('.nav-overlay');
+  const navItems = document.querySelectorAll('.navbar nav .nav-item');
+  let hideTimeout;
+
+  function buildOverlayContent(item){
+    // If item has a dropdown-menu, clone its links; otherwise clone the single anchor
+    const dropdown = item.querySelector('.dropdown-menu');
+    let html = '';
+    if(dropdown){
+      const links = dropdown.querySelectorAll('a');
+      links.forEach(a=>{ html += `<a href="${a.getAttribute('href')}">${a.textContent}</a>`; });
+    } else {
+      const topA = item.querySelector('a');
+      if(topA) html = `<a href="${topA.getAttribute('href')}">${topA.textContent}</a>`;
+    }
+    return html;
+  }
+
+  navItems.forEach(item=>{
+    item.addEventListener('mouseenter', ()=>{
+      const bg = item.getAttribute('data-bg');
+      if(bg && overlay){
+        overlay.style.backgroundImage = `linear-gradient(rgba(10,10,12,0.55), rgba(10,10,12,0.55)), url(${bg})`;
+      }
+      const content = buildOverlayContent(item);
+      const linksWrap = overlay.querySelector('.overlay-links');
+      if(linksWrap){
+        linksWrap.innerHTML = content;
+      }
+      overlay.classList.add('visible');
+      clearTimeout(hideTimeout);
+    });
+    item.addEventListener('mouseleave', ()=>{
+      hideTimeout = setTimeout(()=> overlay.classList.remove('visible'), 150);
+    });
+  });
+  if(overlay){
+    overlay.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); overlay.classList.add('visible'); });
+    overlay.addEventListener('mouseleave', ()=> overlay.classList.remove('visible'));
+  }
+})();
+</script>
 </body>
 </html>

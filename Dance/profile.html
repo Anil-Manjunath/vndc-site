@@ -12,16 +12,44 @@
 <header class="navbar">
   <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none">VNDC</a></div>
   <nav class="nav desktop-nav">
-    <a href="index.html">About</a>
+    <a href="index.html" data-bg="assets/TC_VNDC_EyeBall_edit.jpg">About</a>
   </nav>
 
   <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
   <nav class="nav nav--mobile" aria-hidden="true">
-    <a href="index.html">About</a>
+    <a href="index.html" data-bg="assets/TC_VNDC_EyeBall_edit.jpg">About</a>
   </nav>
+
+  <div class="nav-overlay" aria-hidden="true"><div class="overlay-inner"><div class="overlay-links"></div></div></div>
 
   <div class="profile">Vishwakiran Nambi</div>
 </header>
+
+<script>
+(function(){
+  const overlay = document.querySelector('.nav-overlay');
+  const navItems = document.querySelectorAll('.navbar nav > .nav-item, .navbar nav > a');
+  let hideTimeout;
+  function buildOverlayContent(item){
+    const dropdown = item.querySelector ? item.querySelector('.dropdown-menu') : null;
+    let html = '';
+    if(dropdown){ const links = dropdown.querySelectorAll('a'); links.forEach(a=>{ html += `<a href="${a.getAttribute('href')}">${a.textContent}</a>`; }); } else { let topA = item.tagName === 'A' ? item : item.querySelector('a'); if(topA) html = `<a href="${topA.getAttribute('href')}">${topA.textContent}</a>`; }
+    return html;
+  }
+  navItems.forEach(item=>{
+    const target = item;
+    item.addEventListener('mouseenter', ()=>{
+      const bg = target.getAttribute('data-bg') || (target.querySelector && target.querySelector('a') && target.querySelector('a').getAttribute('data-bg'));
+      if(bg && overlay){ overlay.style.backgroundImage = `linear-gradient(rgba(10,10,12,0.55), rgba(10,10,12,0.55)), url(${bg})`; }
+      const content = buildOverlayContent(target);
+      const linksWrap = overlay.querySelector('.overlay-links'); if(linksWrap){ linksWrap.innerHTML = content; }
+      overlay.classList.add('visible'); clearTimeout(hideTimeout);
+    });
+    item.addEventListener('mouseleave', ()=>{ hideTimeout = setTimeout(()=> overlay.classList.remove('visible'), 150); });
+  });
+  if(overlay){ overlay.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); overlay.classList.add('visible'); }); overlay.addEventListener('mouseleave', ()=> overlay.classList.remove('visible')); }
+})();
+</script>
 
 <section class="profile-page">
  

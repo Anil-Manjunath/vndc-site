@@ -14,10 +14,10 @@
 <header class="navbar">
   <div class="logo">VNDC</div>
   <nav>
-    <div class="nav-item">
+    <div class="nav-item" data-bg="assets/TC_VNDC_EyeBall_edit.jpg">
       <a href="index.html">Home</a>
     </div>
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown" data-bg="assets/116.jpg">
       <a href="repertoire.html">Repertoire</a>
       <div class="dropdown-menu">
         <a href="yele-oota.html">Yele Oota</a>
@@ -37,9 +37,9 @@
     <div class="nav-item dropdown">
       <a href="commercial-events.html">Commercial events</a>
       <div class="dropdown-menu">
-        <a href="commercial-events.html#small-events">Small Events</a>
-        <a href="commercial-events.html#brand-collaborations">Brand Collaborations</a>
-        <a href="commercial-events.html#gala-shows">Gala Shows</a>
+        <a href="commercial-events.html#small-events">Guru Shlokha  </a>
+        <a href="commercial-events.html#brand-collaborations">Arohana</a>
+        <a href="commercial-events.html#gala-shows">Patakha</a>
       </div>
     </div>
     <div class="nav-item dropdown">
@@ -52,26 +52,51 @@
       </div>
     </div>
   </nav>
+  <div class="nav-overlay" aria-hidden="true"><div class="overlay-inner"><div class="overlay-links"></div></div></div>
   <a href="profile.html" class="profile" target="_blank" rel="noopener">Vishwakiran Nambi</a>
 </header>
 
+<script src="js/script.js"></script>
+<script>
+(function(){
+  const overlay = document.querySelector('.nav-overlay');
+  const navItems = document.querySelectorAll('.navbar nav > .nav-item, .navbar nav > a');
+  let hideTimeout;
+  function buildOverlayContent(item){
+    const dropdown = item.querySelector ? item.querySelector('.dropdown-menu') : null;
+    let html = '';
+    if(dropdown){ const links = dropdown.querySelectorAll('a'); links.forEach(a=>{ html += `<a href="${a.getAttribute('href')}">${a.textContent}</a>`; }); } else { let topA = item.tagName === 'A' ? item : item.querySelector('a'); if(topA) html = `<a href="${topA.getAttribute('href')}">${topA.textContent}</a>`; }
+    return html;
+  }
+  navItems.forEach(item=>{
+    const target = item;
+    item.addEventListener('mouseenter', ()=>{
+      const bg = target.getAttribute('data-bg') || (target.querySelector && target.querySelector('a') && target.querySelector('a').getAttribute('data-bg'));
+      if(bg && overlay){ overlay.style.backgroundImage = `linear-gradient(rgba(10,10,12,0.55), rgba(10,10,12,0.55)), url(${bg})`; }
+      const content = buildOverlayContent(target);
+      const linksWrap = overlay.querySelector('.overlay-links'); if(linksWrap){ linksWrap.innerHTML = content; }
+      overlay.classList.add('visible'); clearTimeout(hideTimeout);
+    });
+    item.addEventListener('mouseleave', ()=>{ hideTimeout = setTimeout(()=> overlay.classList.remove('visible'), 150); });
+  });
+  if(overlay){ overlay.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); overlay.classList.add('visible'); }); overlay.addEventListener('mouseleave', ()=> overlay.classList.remove('visible')); }
+})();
+</script>
+
 <!-- COMMERCIAL EVENTS -->
 <section id="corporate" class="corporate interactive-section">
-  <div class="container">
-    <h2>Commercial events</h2>
-    <p>Tailored performances for corporate events, brand activations, and private gala evenings.</p>
-    <div class="corporate-grid">
+ 
       <div class="corp-card interactive-card" id="small-events">
-        <h4>Small Events</h4>
-        <p>Curated mini-performances for conferences and product launches.</p>
+        <h4>Guru Shlokha</h4>
+        <p>A mesmerizing fusion of ancient wisdom and modern innovation, Guru Shlokha explores the timeless principles that anchor transformation. Three concentric rings come alive through fluid movement, each one a meditation on the foundational values that enable lasting progress. Set to sacred Sanskrit chants, this piece reveals how revolutionary change emerges not from abandoning tradition, but from honoring the essential truths that connect us across time, trust, security, and human connection.</p>
       </div>
       <div class="corp-card interactive-card" id="brand-collaborations">
-        <h4>Brand Collaborations</h4>
-        <p>Choreography and direction for integrated campaigns.</p>
+        <h4>Arohana</h4>
+        <p>Arohana traces the elegant geometry of ascension, where individual moments of elevation become collective transformation. Through the manipulation of stark white structures, dancers chart an upward journey that mirrors both technological advancement and human aspiration. This contemplative work celebrates the democratization of possibility, exploring how barriers dissolve and horizons expand when access becomes universal. It is a meditation on reaching beyond what confines us toward what connects us</p>
       </div>
       <div class="corp-card interactive-card" id="gala-shows">
-        <h4>Gala Shows</h4>
-        <p>Full-scale performances for gala dinners and award nights.</p>
+        <h4>Patakha</h4>
+        <p>Raw, explosive, and unapologetically fierce, Patakha ignites the stage with the unstoppable energy of revolution in motion. Driven by thunderous percussion, dancers defy gravity in a high-octane celebration of breakthrough momentum and pioneering spirit. This electrifying finale captures the burning passion that fuels all transformative endeavors, the audacious vision, the relentless innovation, and the explosive force that propels us into new frontiers of what's possible..</p>
       </div>
     </div>
   </div>
